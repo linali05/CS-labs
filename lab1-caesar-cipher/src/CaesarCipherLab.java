@@ -26,8 +26,12 @@ public class CaesarCipherLab {
             System.out.println("Key:        " + key);
             System.out.println("Ciphertext: " + ciphertext);
         } else {
+            String plaintext = decrypt(text, key, ALPHABET);
+
             System.out.println();
-            System.out.println("Decryption will be added next.");
+            System.out.println("Ciphertext: " + text);
+            System.out.println("Key:        " + key);
+            System.out.println("Plaintext:  " + plaintext);
         }
 
         scanner.close();
@@ -143,6 +147,28 @@ public class CaesarCipherLab {
             int position = alphabet.indexOf(ch);
 
             int newPosition = (position + key) % N;
+
+            result.append(alphabet.charAt(newPosition));
+        }
+
+        return result.toString();
+    }
+
+    private static String decrypt(
+            String text,
+            int key,
+            String alphabet
+    ) {
+        StringBuilder result = new StringBuilder();
+
+        for (char ch : text.toCharArray()) {
+            int position = alphabet.indexOf(ch);
+
+            int newPosition = (position - key) % N;
+
+            if (newPosition < 0) {
+                newPosition += N;
+            }
 
             result.append(alphabet.charAt(newPosition));
         }
