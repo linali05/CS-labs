@@ -28,7 +28,7 @@ public class CaesarCipherLab {
                     break;
 
                 case "2":
-                    System.out.println("Task 1.2 will be added next.");
+                    runTask12(scanner);
                     break;
 
                 case "0":
@@ -67,6 +67,23 @@ public class CaesarCipherLab {
             System.out.println("Key:        " + key);
             System.out.println("Plaintext:  " + plaintext);
         }
+    }
+
+    private static void runTask12(Scanner scanner) {
+        System.out.println();
+        System.out.println(
+                "Task 1.2 - Caesar Cipher with Permutation"
+        );
+
+        boolean encrypt = readOperation(scanner);
+        int key = readKey(scanner);
+        String keyword = readKeyword(scanner);
+
+        System.out.println();
+        System.out.println("Selected operation: "
+                + (encrypt ? "Encryption" : "Decryption"));
+        System.out.println("Key 1: " + key);
+        System.out.println("Key 2: " + keyword);
     }
 
     private static boolean readOperation(Scanner scanner) {
@@ -147,6 +164,40 @@ public class CaesarCipherLab {
             System.out.println(
                     "Only Romanian alphabet letters and spaces are allowed."
             );
+        }
+    }
+
+    private static String readKeyword(Scanner scanner) {
+        while (true) {
+            System.out.print(
+                    "Enter keyword (minimum 7 Romanian letters): "
+            );
+
+            String keyword = scanner.nextLine();
+
+            keyword = normalizeRomanian(keyword);
+            keyword = keyword.toUpperCase(Locale.ROOT);
+
+            if (keyword.length() < 7) {
+                System.out.println(
+                        "Invalid keyword. It must contain at least 7 characters."
+                );
+                continue;
+            }
+
+            Character invalid = findInvalidCharacter(keyword);
+
+            if (invalid != null) {
+                System.out.println(
+                        "Invalid character in keyword: '" + invalid + "'."
+                );
+                System.out.println(
+                        "The keyword may contain only Romanian alphabet letters."
+                );
+                continue;
+            }
+
+            return keyword;
         }
     }
 
