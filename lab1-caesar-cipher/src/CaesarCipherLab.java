@@ -88,11 +88,27 @@ public class CaesarCipherLab {
         System.out.println("Permuted alphabet:");
         System.out.println(permutedAlphabet);
 
-        System.out.println();
-        System.out.println("Selected operation: "
-                + (encrypt ? "Encryption" : "Decryption"));
-        System.out.println("Key 1: " + key);
-        System.out.println("Key 2: " + keyword);
+        String text = readText(scanner);
+
+        if (encrypt) {
+            String ciphertext =
+                    encrypt(text, key, permutedAlphabet);
+
+            System.out.println();
+            System.out.println("Plaintext:  " + text);
+            System.out.println("Key 1:      " + key);
+            System.out.println("Key 2:      " + keyword);
+            System.out.println("Ciphertext: " + ciphertext);
+        } else {
+            String plaintext =
+                    decrypt(text, key, permutedAlphabet);
+
+            System.out.println();
+            System.out.println("Ciphertext: " + text);
+            System.out.println("Key 1:      " + key);
+            System.out.println("Key 2:      " + keyword);
+            System.out.println("Plaintext:  " + plaintext);
+        }
     }
 
     private static boolean readOperation(Scanner scanner) {
