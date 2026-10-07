@@ -79,6 +79,15 @@ public class CaesarCipherLab {
         int key = readKey(scanner);
         String keyword = readKeyword(scanner);
 
+        String permutedAlphabet = buildPermutedAlphabet(keyword);
+
+        System.out.println();
+        System.out.println("Original alphabet:");
+        System.out.println(ALPHABET);
+
+        System.out.println("Permuted alphabet:");
+        System.out.println(permutedAlphabet);
+
         System.out.println();
         System.out.println("Selected operation: "
                 + (encrypt ? "Encryption" : "Decryption"));
@@ -254,6 +263,24 @@ public class CaesarCipherLab {
             }
 
             result.append(alphabet.charAt(newPosition));
+        }
+
+        return result.toString();
+    }
+
+    private static String buildPermutedAlphabet(String keyword) {
+        StringBuilder result = new StringBuilder();
+
+        for (char ch : keyword.toCharArray()) {
+            if (result.indexOf(String.valueOf(ch)) == -1) {
+                result.append(ch);
+            }
+        }
+
+        for (char ch : ALPHABET.toCharArray()) {
+            if (result.indexOf(String.valueOf(ch)) == -1) {
+                result.append(ch);
+            }
         }
 
         return result.toString();
