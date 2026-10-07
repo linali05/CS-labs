@@ -18,10 +18,17 @@ public class CaesarCipherLab {
         int key = readKey(scanner);
         String text = readText(scanner);
 
-        System.out.println("Selected operation: "
-                + (encrypt ? "Encryption" : "Decryption"));
-        System.out.println("Selected key: " + key);
-        System.out.println("Prepared text: " + text);
+        if (encrypt) {
+            String ciphertext = encrypt(text, key, ALPHABET);
+
+            System.out.println();
+            System.out.println("Plaintext:  " + text);
+            System.out.println("Key:        " + key);
+            System.out.println("Ciphertext: " + ciphertext);
+        } else {
+            System.out.println();
+            System.out.println("Decryption will be added next.");
+        }
 
         scanner.close();
     }
@@ -123,5 +130,23 @@ public class CaesarCipherLab {
         }
 
         return null;
+    }
+
+    private static String encrypt(
+            String text,
+            int key,
+            String alphabet
+    ) {
+        StringBuilder result = new StringBuilder();
+
+        for (char ch : text.toCharArray()) {
+            int position = alphabet.indexOf(ch);
+
+            int newPosition = (position + key) % N;
+
+            result.append(alphabet.charAt(newPosition));
+        }
+
+        return result.toString();
     }
 }
