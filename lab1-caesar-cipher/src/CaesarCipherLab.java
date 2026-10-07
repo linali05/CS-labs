@@ -14,13 +14,40 @@ public class CaesarCipherLab {
 
         System.out.println("Caesar Cipher - Laboratory 1");
 
+        boolean encrypt = readOperation(scanner);
         int key = readKey(scanner);
         String text = readText(scanner);
 
+        System.out.println("Selected operation: "
+                + (encrypt ? "Encryption" : "Decryption"));
         System.out.println("Selected key: " + key);
         System.out.println("Prepared text: " + text);
 
         scanner.close();
+    }
+
+    private static boolean readOperation(Scanner scanner) {
+        while (true) {
+            System.out.println();
+            System.out.println("Choose operation:");
+            System.out.println("1. Encryption");
+            System.out.println("2. Decryption");
+            System.out.print("Option: ");
+
+            String operation = scanner.nextLine();
+
+            if (operation.equals("1")) {
+                return true;
+            }
+
+            if (operation.equals("2")) {
+                return false;
+            }
+
+            System.out.println(
+                    "Invalid operation. Enter 1 or 2."
+            );
+        }
     }
 
     private static int readKey(Scanner scanner) {
