@@ -12,7 +12,41 @@ public class CaesarCipherLab {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8);
 
-        System.out.println("Caesar Cipher - Laboratory 1");
+        while (true) {
+            System.out.println();
+            System.out.println("Caesar Cipher Laboratory. Choose a task:");
+            System.out.println("1. Task 1.1 - Caesar Cipher");
+            System.out.println("2. Task 1.2 - Caesar Cipher with permutation");
+            System.out.println("0. Exit");
+            System.out.print("Choose an option: ");
+
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1":
+                    runTask11(scanner);
+                    break;
+
+                case "2":
+                    System.out.println("Task 1.2 will be added next.");
+                    break;
+
+                case "0":
+                    System.out.println("Program finished.");
+                    scanner.close();
+                    return;
+
+                default:
+                    System.out.println(
+                            "Invalid option. Enter 0, 1 or 2."
+                    );
+            }
+        }
+    }
+
+    private static void runTask11(Scanner scanner) {
+        System.out.println();
+        System.out.println("Task 1.1 - Caesar Cipher");
 
         boolean encrypt = readOperation(scanner);
         int key = readKey(scanner);
@@ -33,8 +67,6 @@ public class CaesarCipherLab {
             System.out.println("Key:        " + key);
             System.out.println("Plaintext:  " + plaintext);
         }
-
-        scanner.close();
     }
 
     private static boolean readOperation(Scanner scanner) {
